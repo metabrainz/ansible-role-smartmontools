@@ -1,0 +1,5 @@
+---
+smartmontools_config: >
+  # smartmontools entry
+smartmontools_group_config: >
+  # smartmontools group entry

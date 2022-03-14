@@ -1,0 +1,33 @@
+---
+- name: Install smartmontools
+  apt:
+    name: "{{ smartmontools_packages }}"
+    state: present
+
+- name: Divert smartd configuration file
+  command: >
+    dpkg-divert --quiet --local --divert
+    /etc/smartd.conf.dpkg-divert
+    --rename /etc/smartd.conf
+  args:
+    creates: /etc/smartd.conf.dpkg-divert
+
+- name: Install smartd configuration
+  template:
+    src: smartd.conf.j2
+    dest: /etc/smartd.conf
+  notify: restart smartd
+
+- name: Update smartd drive database
+  command:
+    cmd: update-smart-drivedb
+  when: smartmontools_update_drivedb
+  notify: restart smartd
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Enable and start smartd
+  service:
+    name: smartd
+    enabled: "{{ smartmontools_service_enabled }}"
+    state: "{{ smartmontools_service_state }}"
+  ignore_errors: "{{ ansible_check_mode }}"

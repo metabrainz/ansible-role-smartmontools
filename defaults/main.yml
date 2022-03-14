@@ -1,0 +1,14 @@
+---
+smartmontools_packages:
+  - smartmontools
+
+smartmontools_service_enabled: yes
+smartmontools_service_state: started
+smartmontools_restart_handler_state: restarted
+
+smartmontools_update_drivedb: false
+
+smartmontools_config: |
+  DEVICESCAN -d removable -n standby -m root -M exec /usr/share/smartmontools/smartd-runner
+smartmontools_group_config: ""
+smartmontools_host_config: ""

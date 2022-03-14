@@ -1,0 +1,7 @@
+---
+- name: Restart smartd
+  listen: restart smartd
+  service:
+    name: smartd
+    state: "{{ smartmontools_restart_handler_state }}"
+  ignore_errors: "{{ ansible_check_mode }}"
