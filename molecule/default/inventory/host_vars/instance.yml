@@ -1,3 +1,10 @@
 ---
 smartmontools_host_config: >
   # smartmontools host entry
+
+smartmontools_host_run_scripts:
+  20test:
+    content: |
+      #!/bin/bash
+      exit 1
+    mode: "0750"

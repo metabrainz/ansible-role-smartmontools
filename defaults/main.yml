@@ -6,6 +6,25 @@ smartmontools_service_enabled: yes
 smartmontools_service_state: started
 smartmontools_restart_handler_state: restarted
 
+# default script installed on Ubuntu / Debian
+smartmontools_run_scripts:
+  10mail: |+
+    #!/bin/bash -e
+
+    # Send mail if /usr/bin/mail exists
+    if ! [ -x /usr/bin/mail ]; then
+    	echo "Your system does not have /usr/bin/mail.  Install the mailx or mailutils package"
+    	exit 1
+    fi
+
+    input=$1
+    shift
+
+    /usr/bin/mail "$@" < $input
+
+smartmontools_group_run_scripts: {}
+smartmontools_host_run_scripts: {}
+
 smartmontools_update_drivedb: false
 
 smartmontools_config: |

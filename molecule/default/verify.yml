@@ -37,6 +37,17 @@
           - /etc/smartd.conf
       changed_when: false
 
+    - name: Ensure 20test run script is present and correct
+      copy:
+        content: |
+          #!/bin/bash
+          exit 1
+        dest: /etc/smartmontools/run.d/20test
+        mode: 0750
+      check_mode: true
+      register: _smartmontools_runscript
+      failed_when: _smartmontools_runscript.changed
+
     - name: Ensure smartmontools service is running
       service:
         name: smartmontools

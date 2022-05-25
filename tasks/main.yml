@@ -18,6 +18,20 @@
     dest: /etc/smartd.conf
   notify: restart smartd
 
+- name: Install smartmontools run scripts
+  copy:
+    content: "{{ item.value.content if item.value is mapping else item.value }}"
+    dest: "/etc/smartmontools/run.d/{{ item.key }}"
+    mode: "{{ item.value.mode|d('0755') }}"
+    owner: "{{ item.value.owner|d('root') }}"
+    group: "{{ item.value.group|d('root') }}"
+  loop: "{{ _smartmontools_run_scripts|dict2items }}"
+  vars:
+    _smartmontools_run_scripts: >-
+      {{ smartmontools_run_scripts |
+      combine(smartmontools_group_run_scripts) |
+      combine(smartmontools_host_run_scripts) }}
+
 - name: Update smartd drive database
   command:
     cmd: update-smart-drivedb
