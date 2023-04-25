@@ -38,6 +38,8 @@
     cmd: update-smart-drivedb
   when: smartmontools_update_drivedb
   notify: restart smartd
+  register: _update_smart_drivedb
+  changed_when: '"drivedb.h is already up to date" not in _update_smart_drivedb.stdout'
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Enable and start smartd

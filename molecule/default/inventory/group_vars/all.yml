@@ -4,6 +4,8 @@ smartmontools_config: >
 smartmontools_group_config: >
   # smartmontools group entry
 
+smartmontools_update_drivedb: true
+
 smartmontools_group_run_scripts:
   20test:
     content: |

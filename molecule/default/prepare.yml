@@ -6,3 +6,10 @@
       apt:
         update_cache: true
         cache_valid_time: 900
+
+    - name: Install update-smart-drivedb dependencies
+      apt:
+        name:
+          - curl
+          - gnupg
+        state: present
