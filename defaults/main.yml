@@ -1,6 +1,4 @@
 ---
-smartmontools_packages:
-  - smartmontools
 
 smartmontools_service_enabled: yes
 smartmontools_service_state: started

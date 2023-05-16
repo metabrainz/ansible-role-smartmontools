@@ -1,7 +1,7 @@
 ---
 - name: Install smartmontools
   apt:
-    name: "{{ smartmontools_packages }}"
+    name: smartmontools
     state: present
 
 - name: Divert smartd configuration file
