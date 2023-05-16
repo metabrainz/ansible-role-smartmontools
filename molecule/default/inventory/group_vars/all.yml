@@ -11,3 +11,8 @@ smartmontools_group_run_scripts:
     content: |
       #!/bin/bash
       exit 255
+  30test: |
+    #!/bin/sh
+    echo "testing"
+
+    exit 42
