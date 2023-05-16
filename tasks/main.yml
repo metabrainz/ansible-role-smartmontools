@@ -14,14 +14,14 @@
 
 - name: Install smartd configuration
   template:
-    src: smartd.conf.j2
+    src: etc/smartd.conf.j2
     dest: /etc/smartd.conf
     mode: 0644
   notify: restart smartd
 
 - name: Install smartmontools run scripts
-  copy:
-    content: "{{ item.value.content if item.value is mapping else item.value }}"
+  template:
+    src: "etc/smartmontools/run.d/runscript.j2"
     dest: "/etc/smartmontools/run.d/{{ item.key }}"
     mode: "{{ item.value.mode | d('0755') }}"
     owner: "{{ item.value.owner | d('root') }}"

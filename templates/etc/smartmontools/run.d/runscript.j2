@@ -1,0 +1,2 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+{{ item.value.content if item.value is mapping else item.value }}
