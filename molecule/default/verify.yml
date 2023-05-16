@@ -1,7 +1,7 @@
 ---
 - name: Verify
   hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:
     - name: Ensure smartmontools is installed
       stat:
@@ -88,7 +88,7 @@
     - name: Ensure smartmontools service is running
       service:
         name: smartmontools
-        state: started
+        state: "{{ smartmontools_service_state }}"
       check_mode: true
       register: result
       failed_when: result is changed

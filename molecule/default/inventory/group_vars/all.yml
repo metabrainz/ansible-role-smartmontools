@@ -1,4 +1,18 @@
 ---
+# smartd unit file has "ConditionVirtualization=no" on Ubuntu 22.04
+smartmontools_service_state: >-
+  {{
+    'stopped' if (ansible_distribution == 'Ubuntu' and
+      (ansible_distribution_version is version('22.04', '>=')))
+      else 'started'
+  }}
+smartmontools_restart_handler_state: >-
+  {{
+    'stopped' if (ansible_distribution == 'Ubuntu' and
+      (ansible_distribution_version is version('22.04', '>=')))
+      else 'restarted'
+  }}
+
 smartmontools_config: >
   # smartmontools entry
 smartmontools_group_config: >
