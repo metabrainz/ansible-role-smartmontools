@@ -29,9 +29,11 @@
   loop: "{{ _smartmontools_run_scripts | dict2items }}"
   vars:
     _smartmontools_run_scripts: >-
-      {{ smartmontools_run_scripts |
-      combine(smartmontools_group_run_scripts) |
-      combine(smartmontools_host_run_scripts) }}
+      {{
+        smartmontools_run_scripts | combine(
+          smartmontools_group_run_scripts, smartmontools_host_run_scripts
+        )
+      }}
 
 - name: Update smartd drive database
   command:
