@@ -1,4 +1,6 @@
 ---
+smartmontools_package_state: present
+smartmontools_package_policy_rc_d: 101
 
 smartmontools_service_enabled: yes
 smartmontools_service_state: started
